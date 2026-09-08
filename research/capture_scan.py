@@ -1,10 +1,10 @@
 """Resumable file acquisition and bounded-memory capture diagnostics, version 1."""
-import hashlib, json, urllib.request, urllib.parse, zipfile, os
+import hashlib, json, urllib.request, urllib.parse, zipfile, os, codecs
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
-SCAN_VERSION=1
+SCAN_VERSION=2
 
 def sha256_file(path):
     h=hashlib.sha256()
@@ -46,13 +46,22 @@ def scan_capture(archive,row,root,receipt):
     dest=root/(row['capture_id']+'.json');finger=root/(row['capture_id']+'.npy')
     if dest.exists() and finger.exists():
         cached=json.loads(dest.read_text())
-        if cached.get('scan_version')==SCAN_VERSION and cached.get('archive_sha256')==receipt['sha256'] and cached.get('fingerprint_sha256')==sha256_file(finger):
+        if cached.get('scan_version') in (1, SCAN_VERSION) and cached.get('archive_sha256')==receipt['sha256'] and cached.get('fingerprint_sha256')==sha256_file(finger):
+            # Version 1 completed only with strict UTF-8, so its successful scans
+            # necessarily had zero undecodable bytes. Preserve their fingerprints.
+            cached.update(scan_version=SCAN_VERSION, undecodable_utf8_bytes=cached.get('undecodable_utf8_bytes',0), decoding_policy='UTF-8; undecodable bytes escaped as literal backslash-x hex; raw archive retained')
+            dest.write_text(json.dumps(cached,indent=2))
             return dict(cached,split=row['split'])
+    decode_stats={'bytes':0}
+    def preserve_bad_bytes(error):
+        decode_stats['bytes'] += error.end-error.start
+        return codecs.backslashreplace_errors(error)
+    codecs.register_error('qos_preserve_bytes',preserve_bad_bytes)
     required=['Time','Source','Destination','Protocol','Length','Info']
     total=bad=backwards=missing=0;previous=None;start=end=None;hashes=[];protocols={}
     with zipfile.ZipFile(archive) as z:
         with z.open(z.infolist()[0]) as stream:
-            for df in pd.read_csv(stream,chunksize=50000,dtype=str,keep_default_na=False):
+            for df in pd.read_csv(stream,chunksize=50000,dtype=str,keep_default_na=False,encoding="utf-8",encoding_errors="qos_preserve_bytes"):
                 if not set(required)<=set(df):raise ValueError('Required packet columns missing')
                 total+=len(df)
                 if total>20_000_000:raise ValueError('Capture row cap exceeded')
@@ -71,7 +80,9 @@ def scan_capture(archive,row,root,receipt):
     if not hashes:raise ValueError('Empty capture')
     unique=np.unique(np.concatenate(hashes));del hashes
     np.save(finger,unique,allow_pickle=False)
-    result={'scan_version':SCAN_VERSION,**row,'archive_sha256':receipt['sha256'],
+    result={'undecodable_utf8_bytes':decode_stats['bytes'],
+            'decoding_policy':'UTF-8; undecodable bytes escaped as literal backslash-x hex; raw archive retained',
+            'scan_version':SCAN_VERSION,**row,'archive_sha256':receipt['sha256'],
             'fingerprint_sha256':sha256_file(finger),'rows':total,'timestamp_parse_failures':bad,
             'timestamp_backsteps':backwards,'rows_with_empty_required_fields':missing,
             'start_time':str(start),'end_time':str(end),'timezone':'unknown',
