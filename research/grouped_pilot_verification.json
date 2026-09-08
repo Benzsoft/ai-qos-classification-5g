@@ -1,0 +1,65 @@
+{
+  "stage": "conservative_recording_group_pilot",
+  "capture_counts": {
+    "Teamfight_Tactics": {
+      "train": {
+        "captures": 8,
+        "groups": 4,
+        "rows": 1980963
+      },
+      "test": {
+        "captures": 1,
+        "groups": 1,
+        "rows": 236506
+      }
+    },
+    "YouTube_Live": {
+      "train": {
+        "captures": 3,
+        "groups": 1,
+        "rows": 4395234
+      },
+      "test": {
+        "captures": 2,
+        "groups": 1,
+        "rows": 1867954
+      }
+    },
+    "Zepeto": {
+      "train": {
+        "captures": 8,
+        "groups": 5,
+        "rows": 738381
+      },
+      "test": {
+        "captures": 2,
+        "groups": 2,
+        "rows": 391946
+      }
+    }
+  },
+  "captures": 24,
+  "groups": 13,
+  "manifest_sha256": "b9e5cad8fecd84bbc1da5276dd80b3fdc73fe232cf47a7fce584df15654f7cf6",
+  "validation_partition": null,
+  "protocol": "fixed-settings pilot; latest recording group held out per application",
+  "model_families": [
+    "random_forest",
+    "svm",
+    "knn",
+    "lstm",
+    "bilstm",
+    "ip_embedding"
+  ],
+  "license": "Unknown",
+  "publication_ready": false,
+  "feature_extraction_ready": true,
+  "limitations": [
+    "Calendar grouping is a conservative proxy, not verified session/device identity.",
+    "Latest group per application plus shared-date holdouts; not a strictly chronological evaluation, even within each application.",
+    "No model tuning, early stopping, feature selection or threshold selection using test data.",
+    "No independent validation group for YouTube Live; fixed settings only.",
+    "Pilot test is development evidence and must not become the final repeatedly inspected publication test.",
+    "License, packet-level attribution and flow extraction still require review."
+  ]
+}
