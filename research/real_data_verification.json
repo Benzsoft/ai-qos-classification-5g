@@ -1,0 +1,196 @@
+{
+  "verification_date": "2026-09-08",
+  "inventory_files": 75,
+  "provider_license": "Unknown",
+  "live_downloads_verified": 3,
+  "prefix_rows_per_file": 5000,
+  "total_download_bytes": 6590492,
+  "reports": [
+    {
+      "dataset": "kimdaegyeom/5g-traffic-datasets",
+      "requested_version": 1,
+      "source_file": "5G_Traffic_Datasets/Metaverse/Zepeto/Zepeto_7.csv",
+      "source_declared_bytes": 1179687,
+      "download_bytes": 131246,
+      "download_sha256": "f77f7ee969749a038fbb4e2af794d1d08e509acc6a7b87383a5c65ef4b3c9ca6",
+      "prefix_csv_sha256": "926f9dc89405cd65601ecd4696b8f60d8a7960bdff29f37ba9d4ba8c9b94459e",
+      "rows_inspected": 5000,
+      "columns": [
+        "No.",
+        "Time",
+        "Source",
+        "Destination",
+        "Protocol",
+        "Length",
+        "Info"
+      ],
+      "dtypes": {
+        "No.": "int64",
+        "Time": "object",
+        "Source": "object",
+        "Destination": "object",
+        "Protocol": "object",
+        "Length": "int64",
+        "Info": "object"
+      },
+      "missing": {
+        "No.": 0,
+        "Time": 0,
+        "Source": 0,
+        "Destination": 0,
+        "Protocol": 0,
+        "Length": 0,
+        "Info": 0
+      },
+      "unique_counts": {
+        "No.": 5000,
+        "Time": 5000,
+        "Source": 16,
+        "Destination": 15,
+        "Protocol": 5,
+        "Length": 414,
+        "Info": 3299
+      },
+      "category_from_path": "Metaverse",
+      "application_from_path": "Zepeto",
+      "label_status": "capture-level path labels; not independently validated per packet",
+      "sampling": "first rows only; schema inspection, not representative benchmark",
+      "training_ready": false,
+      "pending": [
+        "license verification",
+        "timestamp semantics",
+        "packet ordering",
+        "flow/session independence",
+        "label validation"
+      ]
+    },
+    {
+      "dataset": "kimdaegyeom/5g-traffic-datasets",
+      "requested_version": 1,
+      "source_file": "5G_Traffic_Datasets/Online_Game/Teamfight_Tactics/Teamfight_Tactics_6.csv",
+      "source_declared_bytes": 10289498,
+      "download_bytes": 1081275,
+      "download_sha256": "e7bf54d7bd39da4a1c71de1c8ac3531dae7300dd8e6fb59b075319851a666292",
+      "prefix_csv_sha256": "f4fd024e73ee2c24c0338cf54281a2642cf5dea479d1089a5f172957f5c931db",
+      "rows_inspected": 5000,
+      "columns": [
+        "No.",
+        "Time",
+        "Source",
+        "Destination",
+        "Protocol",
+        "Length",
+        "Info"
+      ],
+      "dtypes": {
+        "No.": "int64",
+        "Time": "object",
+        "Source": "object",
+        "Destination": "object",
+        "Protocol": "object",
+        "Length": "int64",
+        "Info": "object"
+      },
+      "missing": {
+        "No.": 0,
+        "Time": 0,
+        "Source": 0,
+        "Destination": 0,
+        "Protocol": 0,
+        "Length": 0,
+        "Info": 0
+      },
+      "unique_counts": {
+        "No.": 5000,
+        "Time": 5000,
+        "Source": 12,
+        "Destination": 12,
+        "Protocol": 5,
+        "Length": 230,
+        "Info": 387
+      },
+      "category_from_path": "Online_Game",
+      "application_from_path": "Teamfight_Tactics",
+      "label_status": "capture-level path labels; not independently validated per packet",
+      "sampling": "first rows only; schema inspection, not representative benchmark",
+      "training_ready": false,
+      "pending": [
+        "license verification",
+        "timestamp semantics",
+        "packet ordering",
+        "flow/session independence",
+        "label validation"
+      ]
+    },
+    {
+      "dataset": "kimdaegyeom/5g-traffic-datasets",
+      "requested_version": 1,
+      "source_file": "5G_Traffic_Datasets/Live_Streaming/YouTube_Live/YouTube_Live_2.csv",
+      "source_declared_bytes": 61508412,
+      "download_bytes": 5377971,
+      "download_sha256": "a34c3209c46ab851871d15ee07e6ebdfbba4fb3297ba34dd05d2cc43efa77bfc",
+      "prefix_csv_sha256": "2cfff69f22f2eda29893aebdbabb6e52005a4a12f776a9457e335c503d111ca8",
+      "rows_inspected": 5000,
+      "columns": [
+        "No.",
+        "Time",
+        "Source",
+        "Destination",
+        "Protocol",
+        "Length",
+        "Info"
+      ],
+      "dtypes": {
+        "No.": "int64",
+        "Time": "object",
+        "Source": "object",
+        "Destination": "object",
+        "Protocol": "object",
+        "Length": "int64",
+        "Info": "object"
+      },
+      "missing": {
+        "No.": 0,
+        "Time": 0,
+        "Source": 0,
+        "Destination": 0,
+        "Protocol": 0,
+        "Length": 0,
+        "Info": 0
+      },
+      "unique_counts": {
+        "No.": 5000,
+        "Time": 5000,
+        "Source": 7,
+        "Destination": 7,
+        "Protocol": 1,
+        "Length": 155,
+        "Info": 4374
+      },
+      "category_from_path": "Live_Streaming",
+      "application_from_path": "YouTube_Live",
+      "label_status": "capture-level path labels; not independently validated per packet",
+      "sampling": "first rows only; schema inspection, not representative benchmark",
+      "training_ready": false,
+      "pending": [
+        "license verification",
+        "timestamp semantics",
+        "packet ordering",
+        "flow/session independence",
+        "label validation"
+      ]
+    }
+  ],
+  "local_checks": [
+    "three live single-file downloads and CSV prefix parses",
+    "bounded download refusal",
+    "timestamp parsing and row bound",
+    "notebook cell syntax"
+  ],
+  "limitations": [
+    "Colab execution not yet verified",
+    "no training splits or model results",
+    "license unresolved",
+    "capture labels not packet-level validated"
+  ]
+}

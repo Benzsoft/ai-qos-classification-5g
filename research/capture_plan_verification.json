@@ -1,0 +1,47 @@
+{
+  "stage": "capture_file_development_manifest",
+  "seed": 42,
+  "manifest_sha256": "0c69e31197b785aa76b491c3384d093fd74c465e83ebb03424388d9975781eb1",
+  "selected_applications": [
+    "Zepeto",
+    "Teamfight_Tactics",
+    "YouTube_Live"
+  ],
+  "capture_counts": {
+    "Zepeto": {
+      "train": 6,
+      "validation": 2,
+      "test": 2
+    },
+    "Teamfight_Tactics": {
+      "train": 7,
+      "validation": 1,
+      "test": 1
+    },
+    "YouTube_Live": {
+      "train": 3,
+      "validation": 1,
+      "test": 1
+    }
+  },
+  "capture_files": 24,
+  "declared_uncompressed_bytes": 1126075271,
+  "split_strategy": "within-application deterministic hash ranking of entire filenames; approximately 60/20/20",
+  "file_overlap_between_partitions": false,
+  "training_ready": false,
+  "publication_ready": false,
+  "limitations": [
+    "File disjointness does not establish independent sessions or devices.",
+    "No chronological or unseen-device generalization claim from this split.",
+    "Selected applications are a development subset; one application per category confounds category and application.",
+    "License and packet-level attribution remain unresolved.",
+    "Do not use the previous one-capture samples as independent train/test data."
+  ],
+  "required_before_training": [
+    "Acquire selected captures with hashes and version metadata.",
+    "Identify recording dates, device/session provenance and possible file continuations.",
+    "Group related captures into the SAME split and regenerate manifest if necessary.",
+    "Detect exact/overlapping packet segments across files; review labels and flow extraction.",
+    "Fit encoders and scalers on training only; freeze final split before tuning."
+  ]
+}
